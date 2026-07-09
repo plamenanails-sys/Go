@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nails Plamena Cholakova — Салон за маникюр</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        /* ──────────────────────────────────────────────────────────────── */
+        /* ROOT CSS VARIABLES                                             */
+        /* ──────────────────────────────────────────────────────────────── */
+        :root {
+            --bg: #ffffff;
+            --surface: #f7f4ef;
+            --surface2: #ede9e0;
+            --rose: #b89a6a;
+            --rose-dim: #8a6e45;
+            --gold: #b8975a;
+            --gold-light: #c9ab78;
+            --text: #1a1a1a;
+            --muted: #7a7060;
+            --border: rgba(180, 155, 100, 0.18);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* BASE STYLES                                                    */
+        /* ──────────────────────────────────────────────────────────────── */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* INTRO ANIMATION                                                */
+        /* ──────────────────────────────────────────────────────────────── */
+        #intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--surface);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #intro.done {
+            display: none;
+        }
+
+        .intro-line-top {
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            margin-bottom: 25px;
+            animation: expandLine 1.3s ease 0.2s forwards;
+        }
+
+        .intro-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2.6rem;
+            letter-spacing: 1px;
+            color: var(--gold);
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeUpIn 1.3s cubic-bezier(0.215, 0.610, 0.355, 1) 0.5s forwards;
+            font-weight: 400;
+        }
+
+        .intro-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--muted);
+            opacity: 0;
+            margin-top: 18px;
+            text-transform: uppercase;
+            animation: fadeUpIn 1.2s cubic-bezier(0.215, 0.610, 0.355, 1) 1.1s forwards;
+        }
+
+        .intro-line {
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            margin-top: 25px;
+            animation: expandLine 1.3s ease 0.9s forwards;
+        }
+
+        @keyframes fadeUpIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes expandLine {
+            to {
+                width: 70px;
+            }
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* NAVBAR                                                         */
+        /* ──────────────────────────────────────────────────────────────── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 900;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            transition: all 0.4s ease;
+            border-bottom: 1px solid transparent;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .navbar.visible {
+            opacity: 1;
+            transform: translateY(0);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.92);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* MENU TRIGGER */
+        .menu-trigger {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-trigger span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: var(--text);
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-trigger span:nth-child(1) { top: 0; }
+        .menu-trigger span:nth-child(2) { top: 9px; }
+        .menu-trigger span:nth-child(3) { top: 18px; }
+
+        .menu-trigger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-trigger.active span:nth-child(2) { opacity: 0; }
+        .menu-trigger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--surface);
+            z-index: 950;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            text-decoration: none;
+            color: var(--text);
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--gold);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* HERO SECTION                                                   */
+        /* ──────────────────────────────────────────────────────────────── */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: var(--surface);
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-brand {
+            font-size: 4.2rem;
+            line-height: 1;
+            margin-bottom: 25px;
+            letter-spacing: 0px;
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 400;
+            animation: fadeUpIn 1.2s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            color: var(--text);
+            animation: fadeUpIn 1.2s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 40px;
+            font-weight: 400;
+            animation: fadeUpIn 1.2s ease 1.1s forwards;
+            opacity: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--text);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: 2px solid var(--text);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--text);
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background-color: transparent;
+            color: #8a6e3f;
+            border-color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold);
+            color: #fff;
+        }
+
+        .hero-shape {
+            position: absolute;
+            border: 1px solid rgba(184, 151, 90, 0.12);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .shape-1 { width: 600px; height: 600px; top: -10%; right: -10%; }
+        .shape-2 { width: 400px; height: 400px; bottom: -5%; left: -5%; }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* COMMON SECTION STYLING                                         */
+        /* ──────────────────────────────────────────────────────────────── */
+        section {
+            padding: 120px 4%;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+            max-width: 600px;
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* REVEAL ANIMATION BASE                                          */
+        /* ──────────────────────────────────────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* VIDEO SECTION                                                  */
+        /* ──────────────────────────────────────────────────────────────── */
+        #videos {
+            background-color: var(--bg);
+            padding-top: 120px;
+        }
+
+        .video-grid {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .video-block {
+            margin-bottom: 60px;
+        }
+
+        .video-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .video-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 40px rgba(184, 151, 90, 0.10);
+            border-radius: 4px;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-poster-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            z-index: 10;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .video-poster-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-poster-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 12;
+        }
+
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* MAIN GALLERY GRID                                              */
+        /* ──────────────────────────────────────────────────────────────── */
+        .all-photos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+        }
+
+        .all-photo-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .all-photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .all-photo-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* SEE MORE BUTTON                                                */
+        /* ──────────────────────────────────────────────────────────────── */
+        .gallery-see-more {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .gallery-see-more a {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .gallery-see-more a:hover {
+            background-color: var(--gold);
+            color: #fff;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* ALL PHOTOS MODAL                                               */
+        /* ──────────────────────────────────────────────────────────────── */
+        .all-photos-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(247, 244, 239, 0.98);
+            z-index: 1800;
+            overflow-y: auto;
+            padding: 80px 4% 60px 4%;
+        }
+
+        .all-photos-modal.active {
+            display: block;
+        }
+
+        .all-photos-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+        }
+
+        .all-photos-modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--text);
+            font-weight: 300;
+        }
+
+        .all-photos-modal-close {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .all-photos-modal-close:hover {
+            color: var(--gold);
+        }
+
+        .all-photos-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .all-photos-modal-grid .all-photo-item {
+            cursor: pointer;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* TRAINING SECTION                                               */
+        /* ──────────────────────────────────────────────────────────────── */
+        .training-section {
+            background-color: var(--bg);
+        }
+
+        .training-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .training-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold);
+            line-height: 1.6;
+            margin-bottom: 36px;
+        }
+
+        .training-block {
+            margin-bottom: 34px;
+        }
+
+        .training-block:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .training-block-title {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .training-text {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--text);
+            font-weight: 300;
+        }
+
+        .training-text + .training-text {
+            margin-top: 14px;
+        }
+
+        .training-text strong,
+        .training-text em {
+            font-style: normal;
+            font-weight: 500;
+            color: var(--rose-dim);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1px;
+        }
+
+        .training-divider {
+            width: 60px;
+            height: 1px;
+            background-color: var(--gold);
+            border: none;
+            margin: 34px 0;
+        }
+
+        .training-signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-top: 30px;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* ADVANCED TRAININGS EXPANDABLE                                  */
+        /* ──────────────────────────────────────────────────────────────── */
+        .advanced-trainings-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .advanced-trainings-wrap.open {
+            max-height: 3000px;
+            opacity: 1;
+        }
+
+        .advanced-divider {
+            width: 60px;
+            height: 1px;
+            background-color: var(--gold);
+            border: none;
+            margin: 44px auto 36px auto;
+        }
+
+        .advanced-section-label {
+            max-width: 760px;
+            margin: 0 auto 28px auto;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+
+        .training-cards {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .training-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: 32px 32px 28px 32px;
+        }
+
+        .training-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .training-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .training-card-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .training-card-intro {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .training-topics {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .training-topic-group {
+            margin-bottom: 16px;
+        }
+
+        .training-topic-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .training-topic-group-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .training-topics li {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text);
+            padding: 4px 0 4px 16px;
+            position: relative;
+        }
+
+        .training-topics li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--border);
+            font-size: 0.8rem;
+        }
+
+        .training-toggle-btn {
+            display: block;
+            margin: 36px auto 0 auto;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 12px 32px;
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        .training-toggle-btn:hover {
+            background-color: var(--gold);
+            color: var(--bg);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* REVIEWS SECTION                                                */
+        /* ──────────────────────────────────────────────────────────────── */
+        .reviews-section {
+            background-color: var(--surface);
+        }
+
+        .reviews-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .reviews-rating .rating-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--text);
+        }
+
+        .reviews-rating .rating-stars {
+            color: var(--gold);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .reviews-rating .rating-count {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .reviews-track-wrap {
+            margin-top: 40px;
+            overflow: hidden;
+            position: relative;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+        }
+
+        .reviews-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: reviewsScroll 42s linear infinite;
+        }
+
+        .reviews-track-wrap:hover .reviews-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes reviewsScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .review-card {
+            flex: 0 0 280px;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            padding: 28px 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .review-card .review-stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .review-card .review-text {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: var(--text);
+            flex-grow: 1;
+        }
+
+        .review-card .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .review-card .review-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: var(--surface2);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .review-card .review-name {
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .review-card .review-source {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* LIGHTBOX MODAL                                                 */
+        /* ──────────────────────────────────────────────────────────────── */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease forwards;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: slideUpModal 0.3s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+        }
+
+        @keyframes slideUpModal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 90vw;
+            max-height: 80vh;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            font-size: 2.5rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .lightbox-nav:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .lightbox-prev { left: -60px; }
+        .lightbox-next { right: -60px; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* CONTACT SECTION                                                */
+        /* ──────────────────────────────────────────────────────────────── */
+        .info-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 60px;
+        }
+
+        .info-block {
+            margin-bottom: 40px;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .info-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .info-hours {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 15px;
+            gap: 40px;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* TEAM SECTION                                                   */
+        /* ──────────────────────────────────────────────────────────────── */
+        #team {
+            background-color: var(--surface);
+        }
+
+        .team-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .team-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .team-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(184, 151, 90, 0.12);
+        }
+
+        .team-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .team-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--text);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .team-role {
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-align: center;
+            margin-top: -10px;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* FOOTER                                                         */
+        /* ──────────────────────────────────────────────────────────────── */
+        footer {
+            background-color: var(--text);
+            color: #fff;
+            padding: 40px 4%;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* FAB BUTTON                                                     */
+        /* ──────────────────────────────────────────────────────────────── */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--gold);
+            color: var(--text);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            opacity: 0;
+            transform: scale(0);
+            box-shadow: 0 4px 12px rgba(184, 151, 90, 0.4);
+        }
+
+        .fab.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* RESPONSIVE QUERIES                                             */
+        /* ──────────────────────────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .hero-brand { font-size: 3.5rem; }
+            .hero-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.8rem; }
+            .nav-links { gap: 20px; }
+            .info-layout { grid-template-columns: 1fr; gap: 40px; }
+            .lightbox-nav { font-size: 1.5rem; top: 20px; }
+            .lightbox-prev { left: 20px; }
+            .lightbox-next { right: 20px; }
+            .lightbox-close { top: 20px; right: 20px; }
+            .menu-trigger { display: block; }
+            .nav-links { display: none; }
+            .all-photos-grid { grid-template-columns: repeat(2, 1fr); }
+            .all-photos-modal-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .review-card { flex: 0 0 240px; padding: 22px 20px; }
+            .training-intro { font-size: 1.15rem; }
+            .training-text { font-size: 0.95rem; }
+            .training-card { padding: 24px 20px 22px 20px; }
+            .training-card-title { font-size: 1.15rem; }
+            .training-card-price { font-size: 1.15rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="intro">
+        <div class="intro-line-top"></div>
+        <div class="intro-logo">Nails Plamena Cholakova</div>
+        <div class="intro-line"></div>
+        <div class="intro-subtitle">Салон за маникюр</div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">Nails Plamena Cholakova</a>
+        <ul class="nav-links">
+            <li><a href="#videos">Видеа</a></li>
+            <li><a href="#team">Екип</a></li>
+            <li><a href="#featured">Галерия</a></li>
+            <li><a href="#contact">Контакт</a></li>
+        </ul>
+        <button class="menu-trigger" id="menuTrigger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#videos" onclick="toggleMenu()">Видеа</a>
+        <a href="#team" onclick="toggleMenu()">Екип</a>
+        <a href="#featured" onclick="toggleMenu()">Галерия</a>
+        <a href="#contact" onclick="toggleMenu()">Контакт</a>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-content">
+            <div class="hero-brand">Nails Plamena Cholakova</div>
+            <h1 class="hero-title">Изкуство върху всеки нокът</h1>
+            <p class="hero-subtitle">естествено. красиво. дълготрайно</p>
+            <a href="#videos" class="btn btn-gold">Вижте нашите видеа</a>
+        </div>
+    </section>
+
+    <section id="videos">
+        <div class="section-header reveal">
+            <span class="section-tag">Видео</span>
+            <h2 class="section-title">Нашите процедури</h2>
+        </div>
+        <div class="video-grid reveal">
+            <div class="video-block">
+                <div class="video-title">Педикюр</div>
+                <div class="video-wrapper">
+                    <div class="video-poster-overlay" id="poster1">
+                        <img src="1.jpg" alt="Начало на маникюр">
+                        <button class="play-btn" onclick="playVideo('video1', 'poster1')">▶</button>
+                    </div>
+                    <video id="video1" src="nails-process.mp4?v=6" controls playsinline preload="metadata"></video>
+                </div>
+            </div>
+
+            <div class="video-block">
+                <div class="video-title">Маникюр</div>
+                <div class="video-wrapper">
+                    <div class="video-poster-overlay" id="poster2">
+                        <img src="2.jpg" alt="Начало на педикюр">
+                        <button class="play-btn" onclick="playVideo('video2', 'poster2')">▶</button>
+                    </div>
+                    <video id="video2" src="plamena-nails.mp4?v=6" controls playsinline preload="metadata"></video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <div class="section-header reveal">
+            <span class="section-tag">Нашият екип</span>
+            <h2 class="section-title">Запознайте се с нас</h2>
+            <p style="margin-top:14px; color:var(--muted); font-size:1rem; line-height:1.7;">
+                Създаваме ти бъдещето, което мечтаеш — с грижа и страст към всеки детайл.
+            </p>
+        </div>
+        <div class="team-row">
+            <div class="team-card reveal">
+                <div class="team-circle">
+                    <img src="rabotnik_p.jpg" alt="Пламена Чолакова">
+                </div>
+                <div class="team-name">Пламена Чолакова</div>
+                <div class="team-role">Собственик</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-circle">
+                    <img src="rabotnik_d.jpg" alt="Диди Боева">
+                </div>
+                <div class="team-name">Диди Боева</div>
+                <div class="team-role">Маникюрист</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-circle">
+                    <img src="rabotnik_h.jpg" alt="Хриси Дойчева">
+                </div>
+                <div class="team-name">Хриси Дойчева</div>
+                <div class="team-role">Маникюрист</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="training" class="training-section">
+        <div class="section-header reveal">
+            <span class="section-tag">Обучения</span>
+            <h2 class="section-title">Вашият професионален <em style="font-style:italic; color:var(--gold);">старт</em></h2>
+        </div>
+        <div class="training-wrap reveal">
+            <p class="training-intro">БАЗОВИ / НАЧАЛНИ ОБУЧЕНИЯ, които се провеждат в Учебната база по професията „Маникюр, педикюр и ноктопластика“</p>
+            <div class="training-block">
+                <div class="training-block-title">Възможности за квалификация</div>
+                <p class="training-text">За придобиване на <strong>квалификация за част от професия</strong> — специфика на професията, в комбинация от предмети /ЕРУ/, удостоверена с <strong>Удостоверение за професионално обучение</strong>, обр. 3-37 на МОН.</p>
+                <p class="training-text">За придобиване на <strong>2-ра степен на професионална квалификация</strong>, удостоверена със <strong>Свидетелство за професионална квалификация /СПК/</strong>, обр. 3-54 на МОН.</p>
+            </div>
+            <hr class="training-divider">
+            <div class="training-block">
+                <div class="training-block-title">Професия</div>
+                <p class="training-text">„Маникюр, педикюр и ноктопластика“ — според избрания вариант на обучение се полагат теоретични и практични изпити, а за СПК — и <strong>държавни изпити</strong>.</p>
+            </div>
+            <div class="training-block">
+                <div class="training-block-title">Признание и стандарт</div>
+                <p class="training-text">Всички документи, които се издават, са <strong>държавно признати</strong> и по образец на МОН. Към всеки документ може да бъде издадено и <strong>Европас приложение</strong> на английски език — описание на професионалните умения.</p>
+                <p class="training-text">Обучението се провежда по утвърден учебен план и програма, в съответствие с <strong>Държавния общообразователен стандарт /ДОС/</strong> по професията „Маникюр, педикюр и ноктопластика“, в сила от 01.01.2026 г.</p>
+            </div>
+            <hr class="training-divider">
+            <div class="training-block">
+                <p class="training-text">И не на последно място, сътрудничеството ми с <strong>Атанас Савов</strong> — управител и директор на ЦПО „Релакс“ – Сливен — ми дава сигурността, че ще дадем най-доброто в работата ни!</p>
+            </div>
+            <p class="training-signature">Благодаря, че избрахте най-правилното място за Вашия професионален старт — очаквам ви, за да обсъдим всички подробности и възможности!</p>
+            <button class="training-toggle-btn" onclick="toggleAdvancedTrainings(this)">Виж още обучения</button>
+        </div>
+        <div class="advanced-trainings-wrap" id="advancedTrainings">
+            <hr class="advanced-divider">
+            <p class="advanced-section-label">Надграждащи обучения</p>
+            <div class="training-cards">
+                <div class="training-card">
+                    <div class="training-card-header">
+                        <div class="training-card-title">Електрическа пила и укрепване на естествен нокът</div>
+                        <div class="training-card-price">230 €</div>
+                    </div>
+                    <ul class="training-topics">
+                        <li>Апаратен и комбиниран маникюр</li>
+                        <li>Подготовка на нокътна плочка</li>
+                        <li>Изравняване на естествен нокът</li>
+                        <li>Почистване на кутикула</li>
+                        <li>Работа с клещи и ножица</li>
+                        <li>Накрайници</li>
+                        <li>Дезинфекция и стерилизация</li>
+                        <li>Подредена и чиста работа</li>
+                        <li>Изчистване на индивидуални грешки</li>
+                        <li>Схеми за работа</li>
+                        <li>Как да правим продуктивни снимки</li>
+                    </ul>
+                </div>
+                <div class="training-card">
+                    <div class="training-card-header">
+                        <div class="training-card-title">Изграждане</div>
+                        <div class="training-card-price">280 €</div>
+                    </div>
+                    <p class="training-card-intro">Обучението се провежда в рамките на деня. Ще разгледаме следните теми и упражнения:</p>
+                    <ul class="training-topics">
+                        <li class="training-topic-group-title" style="padding-left:0; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); list-style:none;">Подготовка</li>
+                        <li>Правилна подготовка на нокътна плочка</li>
+                        <li>Правилно оформяне на свободния край</li>
+                        <li>Безопасно премахване на кожна гънка</li>
+                        <li>Инструменти и накрайници на електрическа пила</li>
+                        <li>Съхранение и поддръжка на електрическа пила</li>
+                        <li class="training-topic-group-title" style="padding-left:0; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); list-style:none; margin-top:12px;">Изграждане</li>
+                        <li>Поставяне на еднократни форми</li>
+                        <li>Салонни форми и техника при всяка от тях</li>
+                        <li>Подбор на инструменти и пили</li>
+                        <li>Правилно пилене и структура</li>
+                        <li class="training-topic-group-title" style="padding-left:0; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); list-style:none; margin-top:12px;">Поддръжка</li>
+                        <li>Начин на работа и времетраене</li>
+                    </ul>
+                </div>
+                <div class="training-card">
+                    <div class="training-card-header">
+                        <div class="training-card-title">Педикюр</div>
+                        <div class="training-card-price">200 €</div>
+                    </div>
+                    <p class="training-card-intro">Еднодневно обучение</p>
+                    <ul class="training-topics">
+                        <li>Оформяне и почистване на нокътна плочка, правилно пилене</li>
+                        <li>Правилен подбор на материали</li>
+                        <li>Хигиена и дезинфекция</li>
+                        <li>Почистване на ходила</li>
+                        <li>Работа с кюре</li>
+                        <li>Работа с електрическа и ръчна пила</li>
+                        <li>Лакиране</li>
+                        <li>Козметика</li>
+                        <li>Съвети за домашна грижа</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="height: 60px;"></div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="section-header reveal">
+            <span class="section-tag">Отзиви</span>
+            <h2 class="section-title">Доверие, изградено с <em style="font-style:italic; color:var(--gold);">всяка визита</em></h2>
+            <div class="reviews-rating">
+                <span class="rating-number">5.0</span>
+                <span class="rating-stars">★★★★★</span>
+                <span class="rating-count">Базирано на отзиви в Google</span>
+            </div>
+        </div>
+        <div class="reviews-track-wrap">
+            <div class="reviews-track" id="reviewsTrack"></div>
+        </div>
+    </section>
+
+    <section id="featured">
+        <div class="section-header reveal">
+            <span class="section-tag">Портфолио</span>
+            <h2 class="section-title">Всички Маникюри</h2>
+        </div>
+        <div class="all-photos-grid" id="allPhotosGrid"></div>
+        <div class="gallery-see-more">
+            <a href="#" onclick="openAllPhotos(); return false;">Виж още</a>
+        </div>
+    </section>
+
+    <div class="all-photos-modal" id="allPhotosModal">
+        <div class="all-photos-modal-header">
+            <span class="all-photos-modal-title">Всички Маникюри</span>
+            <button class="all-photos-modal-close" onclick="closeAllPhotos()">✕</button>
+        </div>
+        <div class="all-photos-modal-grid" id="allPhotosModalGrid"></div>
+    </div>
+
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="prevImage()">❮</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="" class="lightbox-image">
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+        <button class="lightbox-nav lightbox-next" onclick="nextImage()">❯</button>
+    </div>
+
+    <section id="contact">
+        <div class="info-layout">
+            <div class="reveal">
+                <span class="section-tag">Локация</span>
+                <h2 class="section-title" style="margin-bottom: 40px;">Заповядайте при нас</h2>
+                <div class="info-block">
+                    <div class="info-label">Адрес</div>
+                    <div class="info-text">гр. Пловдив, ул. „Преслав" 12</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Телефон за връзка</div>
+                    <div class="info-text">+359 89 270 6346</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">Социални мрежи</div>
+                    <div class="info-text">
+                        <a href="#" style="color: var(--text); margin-right: 15px;">Instagram</a>
+                        <a href="#" style="color: var(--text);">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal" style="display: flex; flex-direction: column; justify-content: center;">
+                <span class="section-tag">Време</span>
+                <h2 class="section-title" style="margin-bottom: 40px;">Работно време</h2>
+                <div class="info-hours">
+                    <span>Понеделник - Петък</span>
+                    <span>09:00 - 19:30</span>
+                </div>
+                <div class="info-hours">
+                    <span>Събота</span>
+                    <span>10:00 - 17:00</span>
+                </div>
+                <div class="info-hours" style="color: var(--gold);">
+                    <span>Неделя</span>
+                    <span>Почивен ден</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-wrap">
+            <div class="footer-logo">NAILS PLAMENA CHOLAKOVA</div>
+            <div class="footer-copy">&copy; 2026 Nails Plamena Cholakova. Всички права запазени.</div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/359892706346" class="fab" id="fab" target="_blank" aria-label="Запази час">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+    </a>
+
+    <script>
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 1. ДАННИ ЗА РЕВЮТАТА (REVIEWS DATA)                             */
+        /* ────────────────────────────────────────────────────────────────── */
+        const reviewsData = [
+            { name: 'Дияна Вълчева', initial: 'Д', text: 'Салонът е уютен и безупречно чист, а Хриси е прекрасна – прецизна, мила и забавна. Винаги си тръгвам с усмивка и перфектен маникюр.' },
+            { name: 'Ивелина Костадинова', initial: 'И', text: 'Това е мястото, на което ще получите красив маникюр и може да сте спокойни за здравето на вашите нокти. Изключителна хигиена и професионализъм.' },
+            { name: 'Мария Йорданова', initial: 'М', text: 'Всеки път, когато посетя салона оставам изключително доволна. Обстановката е чиста, уютна и много приятна.' },
+            { name: 'Виктория Ангелова', initial: 'В', text: 'Работата на Хриси е страхотна! Салонът е много чист и приветлив, а качеството на работа е безупречно! Определено ще се връщам.' },
+            { name: 'Сюзана Чолакова', initial: 'С', text: 'Страхотен маникюр, много прецизна работа и отлична хигиена. Салонът е изключително чист и поддържан. Момичетата са невероятни.' },
+            { name: 'Диана Тонева', initial: 'Д', text: 'Познавам Плами от над 8 години вече и мога да кажа за нея, че е изключителен човек с непрекъснато желание за развитие и усъвършенстване.' },
+            { name: 'Янита Андонова', initial: 'Я', text: 'Изключително съм доволна от този салон! Маникюристката ми Хриси е страхотна – млада, прецизна и винаги внимателна към детайла.' },
+            { name: 'Елица Дойчева', initial: 'Е', text: 'Приказно място, в което те посрещат изключително мило, с огромна усмивка и творят истинско изкуство върху ноктите.' }
+        ];
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 2. ФУНКЦИЯ ЗА ИЗГРАЖДАНЕ НА БЕЗКРАЙНИТЕ РЕВЮТА                  */
+        /* ────────────────────────────────────────────────────────────────── */
+        function buildReviewsTrack() {
+            const track = document.getElementById('reviewsTrack');
+            if (!track) return;
+            const cardHTML = (r) => `
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-text">${r.text}</div>
+                    <div class="review-author">
+                        <div class="review-avatar">${r.initial}</div>
+                        <div>
+                            <div class="review-name">${r.name}</div>
+                            <div class="review-source">Google отзив</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            track.innerHTML = reviewsData.map(cardHTML).join('') + reviewsData.map(cardHTML).join('');
+        }
+        buildReviewsTrack();
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 3. ФУНКЦИЯ ЗА РАЗГЪВАНЕ НА ДОПЪЛНИТЕЛНИТЕ ОБУЧЕНИЯ              */
+        /* ────────────────────────────────────────────────────────────────── */
+        function toggleAdvancedTrainings(btn) {
+            const wrap = document.getElementById('advancedTrainings');
+            const isOpen = wrap.classList.contains('open');
+            wrap.classList.toggle('open');
+            btn.textContent = isOpen ? 'Виж още обучения' : 'Скрий';
+            if (!isOpen) {
+                setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+            }
+        }
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 4. ДАННИ ЗА ГАЛЕРИЯТА (ПРАВИЛНИ ПЪТИЩА КЪМ ТВОИТЕ ФАЙЛОВЕ)         */
+        /* ────────────────────────────────────────────────────────────────── */
+        const galleryImages = [
+            { src: '1.jpg' },
+            { src: '2.jpg' },
+            { src: '3.jpg' },
+            { src: '4.jpg' },
+            { src: '5.jpg' },
+            { src: '6.jpg' },
+            { src: '7.jpg' },
+            { src: '8.jpg' },
+            { src: '9.jpg' },
+            { src: '10.jpg' },
+            { src: '11.jpg' },
+            { src: '12.jpg' },
+            { src: '13.jpg' }
+        ];
+
+        let currentImageIndex = 0;
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 5. ИЗГРАЖДАНЕ НА НАЧАЛНАТА ГАЛЕРИЯ (първите 4 снимки)           */
+        /* ────────────────────────────────────────────────────────────────── */
+        function buildAllPhotosGrid() {
+            const grid = document.getElementById('allPhotosGrid');
+            grid.innerHTML = galleryImages.slice(0, 4).map((photo, i) => `
+                <div class="all-photo-item" onclick="openLightbox(${i})">
+                    <img src="${photo.src}" alt="Маникюр ${i+1}">
+                </div>
+            `).join('');
+        }
+        buildAllPhotosGrid();
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 6. ФУНКЦИИ ЗА МОДАЛА С ВСИЧКИ СНИМКИ                              */
+        /* ────────────────────────────────────────────────────────────────── */
+        function openAllPhotos() {
+            const modal = document.getElementById('allPhotosModal');
+            const grid = document.getElementById('allPhotosModalGrid');
+            grid.innerHTML = galleryImages.map((photo, i) => `
+                <div class="all-photo-item" onclick="closeAllPhotos(); openLightbox(${i});">
+                    <img src="${photo.src}" alt="Маникюр ${i+1}">
+                </div>
+            `).join('');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAllPhotos() {
+            document.getElementById('allPhotosModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 7. ФУНКЦИИ ЗА СВЕТЛИННАТА КУТИЯ (LIGHTBOX)                        */
+        /* ────────────────────────────────────────────────────────────────── */
+        function updateBodyScroll() {
+            const lbActive = document.getElementById('lightboxModal').classList.contains('active');
+            document.body.style.overflow = lbActive ? 'hidden' : '';
+        }
+
+        function updateLightbox(index) {
+            const img = document.getElementById('lightboxImage');
+            const counter = document.getElementById('lightboxCounter');
+            img.src = galleryImages[index].src;
+            counter.textContent = `${index + 1} / ${galleryImages.length}`;
+        }
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            updateLightbox(index);
+            document.getElementById('lightboxModal').classList.add('active');
+            updateBodyScroll();
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.remove('active');
+            updateBodyScroll();
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateLightbox(currentImageIndex);
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightbox(currentImageIndex);
+        }
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 8. КЛАВИШИ ЗА НАВИГАЦИЯ В СВЕТЛИННАТА КУТИЯ                      */
+        /* ────────────────────────────────────────────────────────────────── */
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightboxModal');
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 9. ЗАТВАРЯНЕ НА СВЕТЛИННАТА КУТИЯ ПРИ КЛИК ИЗВЪН СНИМКАТА        */
+        /* ────────────────────────────────────────────────────────────────── */
+        document.getElementById('lightboxModal').addEventListener('click', (e) => {
+            if (e.target.id === 'lightboxModal') closeLightbox();
+        });
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 10. НАЧАЛНА ИНТРО АНИМАЦИЯ                                        */
+        /* ────────────────────────────────────────────────────────────────── */
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('intro');
+                intro.style.transition = 'opacity .8s';
+                intro.style.opacity = '0';
+                setTimeout(() => {
+                    intro.classList.add('done');
+                    document.getElementById('navbar').classList.add('visible');
+                }, 800);
+            }, 3500);
+        });
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 11. СКРОЛВАНЕ ЗА НАВИГАЦИЯ И FAB БУТОНА                           */
+        /* ────────────────────────────────────────────────────────────────── */
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            const fab = document.getElementById('fab');
+            if (window.scrollY > 80) {
+                nav.style.background = 'rgba(255,255,255,.97)';
+            } else {
+                nav.style.background = '';
+            }
+            if (window.scrollY > 400) fab.classList.add('visible');
+            else fab.classList.remove('visible');
+        });
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 12. АНИМАЦИЯ ПРИ ПОЯВЯВАНЕ (INTERSECTION OBSERVER)                */
+        /* ────────────────────────────────────────────────────────────────── */
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('in-view');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 13. МОБИЛНО МЕНЮ (TOGGLE)                                         */
+        /* ────────────────────────────────────────────────────────────────── */
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('menuTrigger').classList.toggle('active');
+        }
+
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 14. ФУНКЦИЯ ЗА ПЛАВНО ИЗЧЕЗВАНЕ НА ПОСТЕРА И СТАРТИРАНЕ НА ВИДЕО   */
+        /* ────────────────────────────────────────────────────────────────── */
+        function playVideo(videoId, posterId) {
+            const video = document.getElementById(videoId);
+            const poster = document.getElementById(posterId);
+            poster.classList.add('fade-out');
+            video.play();
+            setTimeout(() => {
+                poster.style.display = 'none';
+            }, 800);
+        }
+    </script>
+</body>
+</html>
