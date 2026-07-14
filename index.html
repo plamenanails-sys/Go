@@ -150,7 +150,7 @@
             font-size: 1.5rem;
             letter-spacing: 1px;
             text-decoration: none;
-            color: var(--text);
+            color: var(--gold);
             font-weight: 400;
             font-style: italic;
         }
@@ -390,6 +390,88 @@
         .reveal.in-view {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
+        /* ABOUT SECTION                                                  */
+        /* ──────────────────────────────────────────────────────────────── */
+        .about-section {
+            background-color: var(--bg);
+        }
+
+        .about-wrap {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .about-intro {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 40px;
+        }
+
+        .about-divider {
+            width: 60px;
+            height: 1px;
+            background-color: var(--gold);
+            border: none;
+            margin: 40px 0;
+        }
+
+        .about-subheading {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .about-achievements {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .about-achievements li {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text);
+            padding: 8px 0 8px 20px;
+            position: relative;
+        }
+
+        .about-achievements li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .about-philosophy {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .about-motto {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .motto-highlight {
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .about-closing {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text);
+            font-style: italic;
         }
 
         /* ──────────────────────────────────────────────────────────────── */
@@ -1133,6 +1215,7 @@
             font-size: 1.2rem;
             letter-spacing: 2px;
             margin-bottom: 15px;
+            color: var(--gold);
         }
 
         .footer-copy {
@@ -1211,6 +1294,7 @@
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-logo">Nails Plamena Cholakova</a>
         <ul class="nav-links">
+            <li><a href="#about">За мен</a></li>
             <li><a href="#videos">Видеа</a></li>
             <li><a href="#team">Екип</a></li>
             <li><a href="#featured">Галерия</a></li>
@@ -1224,6 +1308,7 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="toggleMenu()">За мен</a>
         <a href="#videos" onclick="toggleMenu()">Видеа</a>
         <a href="#team" onclick="toggleMenu()">Екип</a>
         <a href="#featured" onclick="toggleMenu()">Галерия</a>
@@ -1241,6 +1326,34 @@
         </div>
     </section>
 
+    <section id="about" class="about-section">
+        <div class="section-header reveal">
+            <span class="section-tag">За мен</span>
+            <h2 class="section-title">Пламена Чолакова</h2>
+        </div>
+        <div class="about-wrap reveal">
+            <p class="about-intro">Казвам се Пламена Чолакова и съм маникюрист и преподавател по маникюр, педикюр и ноктопластика. През 2013 г започна моето начало в тази професия, като през годините съм преминала много обучения както тук в България, така и в чужбина. На този етап от моето развитие вярвам, че съм постигнала своите мечтани върхове и от тук нататък ще продължа да предавам всичко онова, което съм научила в практиката си.</p>
+            
+            <div class="about-divider"></div>
+            
+            <h3 class="about-subheading">Постижения</h3>
+            <ul class="about-achievements">
+                <li>Участия в международни конкурси, отличени с първи и втори места</li>
+                <li>Световно първенство, в което отбелязах три първи награди</li>
+                <li>Удостоена като Майстор маникюрист от международни преподаватели</li>
+                <li>През последните 6 години съм се отдала на преподаването</li>
+            </ul>
+            
+            <div class="about-divider"></div>
+            
+            <p class="about-philosophy">Вярвам, че всичко, което се прави с Любов, има смисъл. Курсистите са моето огледало и се радвам, че вървят напред.</p>
+            
+            <p class="about-motto"><span class="motto-highlight">Успеха има цена</span> и тя не се измерва във валута. Успеха е когато оставиш следа в някого!</p>
+            
+            <p class="about-closing">Вярвайте и продължавайте, дори когато е най-трудно, защото пътя е само <span class="motto-highlight">НАПРЕД</span>!</p>
+        </div>
+    </section>
+
     <section id="videos">
         <div class="section-header reveal">
             <span class="section-tag">Видео</span>
@@ -1251,7 +1364,7 @@
                 <div class="video-title">Педикюр</div>
                 <div class="video-wrapper">
                     <div class="video-poster-overlay" id="poster1">
-                        <img src="1.jpg" alt="Начало на маникюр">
+                        <img src="12.jpg" alt="Начало на маникюр">
                         <button class="play-btn" onclick="playVideo('video1', 'poster1')">▶</button>
                     </div>
                     <video id="video1" src="nails-process.mp4?v=6" controls playsinline preload="metadata"></video>
@@ -1262,7 +1375,7 @@
                 <div class="video-title">Маникюр</div>
                 <div class="video-wrapper">
                     <div class="video-poster-overlay" id="poster2">
-                        <img src="2.jpg" alt="Начало на педикюр">
+                        <img src="13.jpg" alt="Начало на педикюр">
                         <button class="play-btn" onclick="playVideo('video2', 'poster2')">▶</button>
                     </div>
                     <video id="video2" src="plamena-nails.mp4?v=6" controls playsinline preload="metadata"></video>
@@ -1310,7 +1423,7 @@
             <h2 class="section-title">Вашият професионален <em style="font-style:italic; color:var(--gold);">старт</em></h2>
         </div>
         <div class="training-wrap reveal">
-            <p class="training-intro">БАЗОВИ / НАЧАЛНИ ОБУЧЕНИЯ, които се провеждат в Учебната база по професията „Маникюр, педикюр и ноктопластика“</p>
+            <p class="training-intro">БАЗОВИ / НАЧАЛНИ ОБУЧЕНИЯ, които се провеждат в Учебната база по професията „Маникюр, педикюр и ноктопластика"</p>
             <div class="training-block">
                 <div class="training-block-title">Възможности за квалификация</div>
                 <p class="training-text">За придобиване на <strong>квалификация за част от професия</strong> — специфика на професията, в комбинация от предмети /ЕРУ/, удостоверена с <strong>Удостоверение за професионално обучение</strong>, обр. 3-37 на МОН.</p>
@@ -1319,16 +1432,16 @@
             <hr class="training-divider">
             <div class="training-block">
                 <div class="training-block-title">Професия</div>
-                <p class="training-text">„Маникюр, педикюр и ноктопластика“ — според избрания вариант на обучение се полагат теоретични и практични изпити, а за СПК — и <strong>държавни изпити</strong>.</p>
+                <p class="training-text">„Маникюр, педикюр и ноктопластика" — според избрания вариант на обучение се полагат теоретични и практични изпити, а за СПК — и <strong>държавни изпити</strong>.</p>
             </div>
             <div class="training-block">
                 <div class="training-block-title">Признание и стандарт</div>
                 <p class="training-text">Всички документи, които се издават, са <strong>държавно признати</strong> и по образец на МОН. Към всеки документ може да бъде издадено и <strong>Европас приложение</strong> на английски език — описание на професионалните умения.</p>
-                <p class="training-text">Обучението се провежда по утвърден учебен план и програма, в съответствие с <strong>Държавния общообразователен стандарт /ДОС/</strong> по професията „Маникюр, педикюр и ноктопластика“, в сила от 01.01.2026 г.</p>
+                <p class="training-text">Обучението се провежда по утвърден учебен план и програма, в съответствие с <strong>Държавния общообразователен стандарт /ДОС/</strong> по професията „Маникюр, педикюр и ноктопластика", в сила от 01.01.2026 г.</p>
             </div>
             <hr class="training-divider">
             <div class="training-block">
-                <p class="training-text">И не на последно място, сътрудничеството ми с <strong>Атанас Савов</strong> — управител и директор на ЦПО „Релакс“ – Сливен — ми дава сигурността, че ще дадем най-доброто в работата ни!</p>
+                <p class="training-text">И не на последно място, сътрудничеството ми с <strong>Атанас Савов</strong> — управител и директор на ЦПО „Релакс" – Сливен — ми дава сигурността, че ще дадем най-доброто в работата ни!</p>
             </div>
             <p class="training-signature">Благодаря, че избрахте най-правилното място за Вашия професионален старт — очаквам ви, за да обсъдим всички подробности и възможности!</p>
             <button class="training-toggle-btn" onclick="toggleAdvancedTrainings(this)">Виж още обучения</button>
@@ -1456,13 +1569,12 @@
                 </div>
                 <div class="info-block">
                     <div class="info-label">Телефон за връзка</div>
-                    <div class="info-text">+359 89 270 6346</div>
+                    <div class="info-text">+359 89 568 1021</div>
                 </div>
                 <div class="info-block">
                     <div class="info-label">Социални мрежи</div>
                     <div class="info-text">
-                        <a href="#" style="color: var(--text); margin-right: 15px;">Instagram</a>
-                        <a href="#" style="color: var(--text);">Facebook</a>
+                        <a href="https://www.facebook.com/" target="_blank" style="color: var(--text);">Facebook</a>
                     </div>
                 </div>
             </div>
@@ -1492,7 +1604,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/359892706346" class="fab" id="fab" target="_blank" aria-label="Запази час">
+    <a href="https://wa.me/359895681021" class="fab" id="fab" target="_blank" aria-label="Запази час">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
         </svg>
