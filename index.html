@@ -674,7 +674,7 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* ABOUT SECTION (коригиран текст)                                */
+        /* ABOUT SECTION                                                  */
         /* ──────────────────────────────────────────────────────────────── */
         .about-section {
             background-color: var(--bg);
@@ -988,22 +988,24 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* MAIN GALLERY GRID (разширена до 20 снимки)                     */
+        /* MAIN GALLERY – само снимки, без празни квадратчета (flex)     */
         /* ──────────────────────────────────────────────────────────────── */
         .all-photos-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
+            justify-content: flex-start;
             max-width: 1200px;
             margin: 40px auto 0 auto;
         }
 
         .all-photo-item {
-            position: relative;
-            overflow: hidden;
+            flex: 0 0 calc(25% - 15px); /* 4 колони, като се взема предвид gap */
             aspect-ratio: 1;
             cursor: pointer;
             border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
         }
 
         .all-photo-item img {
@@ -1086,15 +1088,26 @@
         }
 
         .all-photos-modal-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            flex-wrap: wrap;
             gap: 12px;
+            justify-content: flex-start;
             max-width: 900px;
             margin: 0 auto;
         }
 
         .all-photos-modal-grid .all-photo-item {
+            flex: 0 0 calc(25% - 9px);
+            aspect-ratio: 1;
             cursor: pointer;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .all-photos-modal-grid .all-photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* ──────────────────────────────────────────────────────────────── */
@@ -1500,7 +1513,7 @@
         .lightbox-next { right: -60px; }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* CONTACT SECTION (телефон -> tel:, Google Maps)                 */
+        /* CONTACT SECTION                                                */
         /* ──────────────────────────────────────────────────────────────── */
         .info-layout {
             display: grid;
@@ -1739,8 +1752,13 @@
             .lightbox-close { top: 20px; right: 20px; }
             .menu-trigger { display: block; }
             .nav-links { display: none; }
-            .all-photos-grid { grid-template-columns: repeat(2, 1fr); }
-            .all-photos-modal-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            /* галерия – 2 колони */
+            .all-photo-item {
+                flex: 0 0 calc(50% - 10px);
+            }
+            .all-photos-modal-grid .all-photo-item {
+                flex: 0 0 calc(50% - 6px);
+            }
             .review-card { flex: 0 0 240px; padding: 22px 20px; }
             .training-intro { font-size: 1.15rem; }
             .training-text { font-size: 0.95rem; }
@@ -1772,6 +1790,13 @@
             .pricing-category-title { font-size: 1.1rem; }
             .pricing-note p { font-size: 0.82rem; }
             .pricing-note .signature { font-size: 1rem; }
+            /* галерия – 2 колони */
+            .all-photo-item {
+                flex: 0 0 calc(50% - 10px);
+            }
+            .all-photos-modal-grid .all-photo-item {
+                flex: 0 0 calc(50% - 6px);
+            }
         }
     </style>
 </head>
@@ -1970,7 +1995,7 @@
         </div>
     </section>
 
-    <!-- ==================== ABOUT (коригиран текст: 2013 г.) ==================== -->
+    <!-- ==================== ABOUT ==================== -->
     <section id="about" class="about-section">
         <div class="section-header reveal">
             <span class="section-tag">За мен</span>
@@ -2191,7 +2216,7 @@
         </div>
     </section>
 
-    <!-- ==================== GALLERY (20 снимки) ==================== -->
+    <!-- ==================== GALLERY (само 13 снимки, без празни места) ==================== -->
     <section id="featured">
         <div class="section-header reveal">
             <span class="section-tag">Портфолио</span>
@@ -2221,7 +2246,7 @@
         <button class="lightbox-nav lightbox-next" onclick="nextImage()">❯</button>
     </div>
 
-    <!-- ==================== CONTACT (телефон -> tel:, Google Maps) ==================== -->
+    <!-- ==================== CONTACT ==================== -->
     <section id="contact">
         <div class="info-layout">
             <div class="reveal">
@@ -2362,10 +2387,10 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 3. GALLERY – 20 images (1.jpg … 20.jpg)                         */
+        /* 3. GALLERY – 13 images (1.jpg … 13.jpg)                         */
         /* ────────────────────────────────────────────────────────────────── */
         const galleryImages = [];
-        for (let i = 1; i <= 20; i++) {
+        for (let i = 1; i <= 13; i++) {
             galleryImages.push(i + '.jpg');
         }
 
@@ -2373,6 +2398,7 @@
 
         function buildAllPhotosGrid() {
             const grid = document.getElementById('allPhotosGrid');
+            // показваме първите 8
             grid.innerHTML = galleryImages.slice(0, 8).map((src, i) => `
                 <div class="all-photo-item" onclick="openLightbox(${i})">
                     <img src="${src}" alt="Маникюр ${i+1}">
@@ -2384,6 +2410,7 @@
         function openAllPhotos() {
             const modal = document.getElementById('allPhotosModal');
             const grid = document.getElementById('allPhotosModalGrid');
+            // в модала показваме всички 13
             grid.innerHTML = galleryImages.map((src, i) => `
                 <div class="all-photo-item" onclick="closeAllPhotos(); openLightbox(${i});">
                     <img src="${src}" alt="Маникюр ${i+1}">
@@ -2527,11 +2554,22 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 10. COMPETITIONS – images k1.jpg … K13.jpg                       */
+        /* 10. COMPETITIONS – точни имена: k1.jpg, K2.jpg … K13.jpg         */
         /* ────────────────────────────────────────────────────────────────── */
         const competitionImages = [
-            'k1.jpg', 'K2.jpg', 'K3.jpg', 'K4.jpg', 'K5.jpg', 'K6.jpg', 'K7.jpg',
-            'K8.jpg', 'K9.jpg', 'K10.jpg', 'K11.jpg', 'K12.jpg', 'K13.jpg'
+            'k1.jpg',
+            'K2.jpg',
+            'K3.jpg',
+            'K4.jpg',
+            'K5.jpg',
+            'K6.jpg',
+            'K7.jpg',
+            'K8.jpg',
+            'K9.jpg',
+            'K10.jpg',
+            'K11.jpg',
+            'K12.jpg',
+            'K13.jpg'
         ];
 
         let competitionCurrentIndex = 0;
