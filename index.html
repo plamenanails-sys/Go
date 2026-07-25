@@ -545,135 +545,6 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* PRICING SECTION                                                */
-        /* ──────────────────────────────────────────────────────────────── */
-        .pricing-section {
-            background-color: var(--surface);
-        }
-
-        .pricing-section .section-header {
-            max-width: 100%;
-            text-align: center;
-        }
-
-        .pricing-section .section-tag,
-        .pricing-section .section-title {
-            text-align: center;
-        }
-
-        .pricing-wrap {
-            max-width: 820px;
-            margin: 0 auto;
-        }
-
-        .pricing-category {
-            margin-bottom: 44px;
-        }
-
-        .pricing-category:last-of-type {
-            margin-bottom: 0;
-        }
-
-        .pricing-category-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: var(--gold);
-            letter-spacing: 1px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .pricing-category-title::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 60px;
-            height: 1px;
-            background-color: var(--gold);
-        }
-
-        .pricing-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(184, 151, 90, 0.08);
-            transition: background 0.2s ease;
-        }
-
-        .pricing-item:last-of-type {
-            border-bottom: none;
-        }
-
-        .pricing-item:hover {
-            background-color: rgba(184, 151, 90, 0.04);
-            margin: 0 -12px;
-            padding: 14px 12px;
-            border-radius: 4px;
-        }
-
-        .pricing-item-name {
-            font-size: 1rem;
-            color: var(--text);
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            padding-right: 20px;
-        }
-
-        .pricing-item-price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            color: var(--gold);
-            font-weight: 400;
-            white-space: nowrap;
-            letter-spacing: 0.5px;
-        }
-
-        .pricing-item-price .bgn {
-            font-size: 0.8rem;
-            color: var(--muted);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 300;
-        }
-
-        .pricing-note {
-            margin-top: 50px;
-            padding: 32px 36px;
-            background-color: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            text-align: center;
-        }
-
-        .pricing-note p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text);
-            font-weight: 300;
-        }
-
-        .pricing-note .heart {
-            color: var(--gold);
-            font-size: 1.1rem;
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .pricing-note .signature {
-            display: block;
-            margin-top: 16px;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--gold);
-            letter-spacing: 1px;
-        }
-
-        /* ──────────────────────────────────────────────────────────────── */
         /* ABOUT SECTION                                                  */
         /* ──────────────────────────────────────────────────────────────── */
         .about-section {
@@ -853,6 +724,34 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
+        /* PRICE LIST SECTION (само снимка, без заглавие)                */
+        /* ──────────────────────────────────────────────────────────────── */
+        .prices-section {
+            background-color: var(--bg);
+            padding: 100px 4% 80px;
+        }
+
+        .price-image-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(184, 151, 90, 0.10);
+            transition: transform 0.3s ease;
+        }
+
+        .price-image-wrapper:hover {
+            transform: scale(1.01);
+        }
+
+        .price-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ──────────────────────────────────────────────────────────────── */
         /* COMPETITIONS SECTION                                           */
         /* ──────────────────────────────────────────────────────────────── */
         .competitions-section {
@@ -988,24 +887,22 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* MAIN GALLERY – само снимки, без празни квадратчета (flex)     */
+        /* MAIN GALLERY GRID                                              */
         /* ──────────────────────────────────────────────────────────────── */
         .all-photos-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            justify-content: flex-start;
             max-width: 1200px;
             margin: 40px auto 0 auto;
         }
 
         .all-photo-item {
-            flex: 0 0 calc(25% - 15px); /* 4 колони, като се взема предвид gap */
+            position: relative;
+            overflow: hidden;
             aspect-ratio: 1;
             cursor: pointer;
             border: 1px solid var(--border);
-            overflow: hidden;
-            position: relative;
         }
 
         .all-photo-item img {
@@ -1088,26 +985,15 @@
         }
 
         .all-photos-modal-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            justify-content: flex-start;
             max-width: 900px;
             margin: 0 auto;
         }
 
         .all-photos-modal-grid .all-photo-item {
-            flex: 0 0 calc(25% - 9px);
-            aspect-ratio: 1;
             cursor: pointer;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-
-        .all-photos-modal-grid .all-photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         /* ──────────────────────────────────────────────────────────────── */
@@ -1429,7 +1315,7 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* LIGHTBOX MODAL                                                 */
+        /* LIGHTBOX MODAL – без брояч                                     */
         /* ──────────────────────────────────────────────────────────────── */
         .lightbox-modal {
             display: none;
@@ -1706,7 +1592,7 @@
         }
 
         /* ──────────────────────────────────────────────────────────────── */
-        /* FAB BUTTON (телефон)                                           */
+        /* FAB BUTTON                                                     */
         /* ──────────────────────────────────────────────────────────────── */
         .fab {
             position: fixed;
@@ -1752,13 +1638,8 @@
             .lightbox-close { top: 20px; right: 20px; }
             .menu-trigger { display: block; }
             .nav-links { display: none; }
-            /* галерия – 2 колони */
-            .all-photo-item {
-                flex: 0 0 calc(50% - 10px);
-            }
-            .all-photos-modal-grid .all-photo-item {
-                flex: 0 0 calc(50% - 6px);
-            }
+            .all-photos-grid { grid-template-columns: repeat(2, 1fr); }
+            .all-photos-modal-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
             .review-card { flex: 0 0 240px; padding: 22px 20px; }
             .training-intro { font-size: 1.15rem; }
             .training-text { font-size: 0.95rem; }
@@ -1769,13 +1650,7 @@
             .competitions-modal-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
             .competitions-section { padding: 80px 4% 60px; }
             .services-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-            .pricing-item { flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px 0; }
-            .pricing-item:hover { margin: 0 -8px; padding: 16px 8px; }
-            .pricing-item-name { font-size: 0.95rem; padding-right: 0; }
-            .pricing-item-price { font-size: 1rem; }
-            .pricing-category-title { font-size: 1.3rem; }
-            .pricing-note { padding: 24px 18px; }
-            .pricing-note p { font-size: 0.88rem; }
+            .prices-section { padding: 80px 4% 60px; }
         }
 
         @media (max-width: 480px) {
@@ -1785,18 +1660,6 @@
             .services-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
             .service-card { padding: 20px 12px 18px; }
             .service-name { font-size: 1.1rem; }
-            .pricing-item-name { font-size: 0.88rem; }
-            .pricing-item-price { font-size: 0.92rem; }
-            .pricing-category-title { font-size: 1.1rem; }
-            .pricing-note p { font-size: 0.82rem; }
-            .pricing-note .signature { font-size: 1rem; }
-            /* галерия – 2 колони */
-            .all-photo-item {
-                flex: 0 0 calc(50% - 10px);
-            }
-            .all-photos-modal-grid .all-photo-item {
-                flex: 0 0 calc(50% - 6px);
-            }
         }
     </style>
 </head>
@@ -1813,15 +1676,15 @@
         <a href="#" class="nav-logo">Nails Plamena Cholakova</a>
         <ul class="nav-links">
             <li><a href="#services">Услуги</a></li>
-            <li><a href="#pricing">Цени</a></li>
             <li><a href="#about">За мен</a></li>
             <li><a href="#videos">Видеа</a></li>
             <li><a href="#team">Екип</a></li>
+            <li><a href="#prices">Цени</a></li>
             <li><a href="#competitions">Конкурси</a></li>
             <li><a href="#featured">Галерия</a></li>
             <li><a href="#contact">Контакт</a></li>
             <li class="nav-social">
-                <a href="https://www.facebook.com/share/1BR55dfJBa/" target="_blank" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/1DJaNsHAME/" target="_blank" aria-label="Facebook">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                     </svg>
@@ -1844,15 +1707,15 @@
 
     <div class="mobile-menu" id="mobileMenu">
         <a href="#services" onclick="toggleMenu()">Услуги</a>
-        <a href="#pricing" onclick="toggleMenu()">Цени</a>
         <a href="#about" onclick="toggleMenu()">За мен</a>
         <a href="#videos" onclick="toggleMenu()">Видеа</a>
         <a href="#team" onclick="toggleMenu()">Екип</a>
+        <a href="#prices" onclick="toggleMenu()">Цени</a>
         <a href="#competitions" onclick="toggleMenu()">Конкурси</a>
         <a href="#featured" onclick="toggleMenu()">Галерия</a>
         <a href="#contact" onclick="toggleMenu()">Контакт</a>
         <div class="mobile-social">
-            <a href="https://www.facebook.com/share/1BR55dfJBa/" target="_blank" aria-label="Facebook">
+            <a href="https://www.facebook.com/share/1DJaNsHAME/" target="_blank" aria-label="Facebook">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                 </svg>
@@ -1923,78 +1786,6 @@
         </div>
     </section>
 
-    <!-- ==================== PRICING ==================== -->
-    <section id="pricing" class="pricing-section">
-        <div class="section-header reveal">
-            <span class="section-tag">Ценоразпис</span>
-            <h2 class="section-title">Нашите <em style="font-style:italic; color:var(--gold);">цени</em></h2>
-        </div>
-        <div class="pricing-wrap reveal">
-            <div class="pricing-category">
-                <h3 class="pricing-category-title">Маникюр</h3>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Оформление почва на кожух и закручиване</span>
-                    <span class="pricing-item-price">15,00 € <span class="bgn">/ 29,34 лв.</span></span>
-                </div>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Маникюр + гел лак / гел — къси нокти</span>
-                    <span class="pricing-item-price">25,00 € <span class="bgn">/ 48,90 лв.</span></span>
-                </div>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Маникюр + гел лак / гел — дълги нокти</span>
-                    <span class="pricing-item-price">30,00 € <span class="bgn">/ 58,67 лв.</span></span>
-                </div>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Декорация</span>
-                    <span class="pricing-item-price">2,00 € <span class="bgn">/ 3,91 лв.</span></span>
-                </div>
-            </div>
-            <div class="pricing-category">
-                <h3 class="pricing-category-title">Изграждане — гел / акрил гел</h3>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Къси нокти</span>
-                    <span class="pricing-item-price">10,00 € <span class="bgn">/ 19,56 лв.</span></span>
-                </div>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Дълги нокти</span>
-                    <span class="pricing-item-price">45,00 € <span class="bgn">/ 88,01 лв.</span></span>
-                </div>
-            </div>
-            <div class="pricing-category">
-                <h3 class="pricing-category-title">Подаръжка на ноктопластика</h3>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Къси нокти</span>
-                    <span class="pricing-item-price">55,00 € <span class="bgn">/ 107,57 лв.</span></span>
-                </div>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">Дълги нокти</span>
-                    <span class="pricing-item-price">30,00 € <span class="bgn">/ 58,67 лв.</span></span>
-                </div>
-            </div>
-            <div class="pricing-category">
-                <h3 class="pricing-category-title">Педикюр</h3>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">СПА педикюр</span>
-                    <span class="pricing-item-price">40,00 € <span class="bgn">/ 78,23 лв.</span></span>
-                </div>
-                <div class="pricing-item">
-                    <span class="pricing-item-name">СПА педикюр с гел лак</span>
-                    <span class="pricing-item-price">30,00 € <span class="bgn">/ 58,67 лв.</span></span>
-                </div>
-            </div>
-            <div class="pricing-note">
-                <p>
-                    <span class="heart">❤</span>
-                    Молим да бъдете отговорни към себе си, здравето си и нашата работа, като посещавате навреме своя маникюрист (15–21 дни).
-                    Стремим се да работим все по-качествено и да се грижим за вас.
-                    <span class="heart">❤</span>
-                    <br><em style="color:var(--gold);">Маникюрът е отговорност</em>
-                    <span class="signature">Nails Plamena Cholakova</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- ==================== ABOUT ==================== -->
     <section id="about" class="about-section">
         <div class="section-header reveal">
@@ -2002,7 +1793,7 @@
             <h2 class="section-title">Пламена Чолакова</h2>
         </div>
         <div class="about-wrap reveal">
-            <p class="about-intro">Казвам се Пламена Чолакова и съм маникюрист и преподавател по маникюр, педикюр и ноктопластика. През 2013 г. започна моето начало в тази професия, като през годините съм преминала много обучения както тук в България, така и в чужбина. На този етап от моето развитие вярвам, че съм постигнала своите мечтани върхове и от тук нататък ще продължа да предавам всичко онова, което съм научила в практиката си.</p>
+            <p class="about-intro">Казвам се Пламена Чолакова и съм маникюрист и преподавател по маникюр, педикюр и ноктопластика. През 2013 г започна моето начало в тази професия, като през годините съм преминала много обучения както тук в България, така и в чужбина. На този етап от моето развитие вярвам, че съм постигнала своите мечтани върхове и от тук нататък ще продължа да предавам всичко онова, което съм научила в практиката си.</p>
             <div class="about-divider"></div>
             <h3 class="about-subheading">Постижения</h3>
             <ul class="about-achievements">
@@ -2025,6 +1816,7 @@
             <h2 class="section-title">Нашите процедури</h2>
         </div>
         <div class="video-grid reveal">
+            <!-- Първо видео – Педикюр (по-дългото) -->
             <div class="video-block">
                 <div class="video-title">Педикюр</div>
                 <div class="video-wrapper">
@@ -2032,9 +1824,10 @@
                         <img src="12.jpg" alt="Начало на педикюр">
                         <button class="play-btn" onclick="playVideo('video1', 'poster1')">▶</button>
                     </div>
-                    <video id="video1" src="plamena-nails.mp4" controls playsinline preload="metadata"></video>
+                    <video id="video1" src="video-salon.MP4" controls playsinline preload="metadata"></video>
                 </div>
             </div>
+            <!-- Второ видео – Маникюр (краткото) -->
             <div class="video-block">
                 <div class="video-title">Маникюр</div>
                 <div class="video-wrapper">
@@ -2042,7 +1835,7 @@
                         <img src="13.jpg" alt="Начало на маникюр">
                         <button class="play-btn" onclick="playVideo('video2', 'poster2')">▶</button>
                     </div>
-                    <video id="video2" src="video-salon.MP4" controls playsinline preload="metadata"></video>
+                    <video id="video2" src="plamena-nails.mp4" controls playsinline preload="metadata"></video>
                 </div>
             </div>
         </div>
@@ -2082,18 +1875,28 @@
         </div>
     </section>
 
+    <!-- ==================== PRICE LIST (само снимка) ==================== -->
+    <section id="prices" class="prices-section">
+        <div class="price-image-wrapper reveal">
+            <img src="chenorazpis.jpg" alt="Ценоразпис Nails Plamena Cholakova">
+        </div>
+    </section>
+
     <!-- ==================== COMPETITIONS ==================== -->
     <section id="competitions" class="competitions-section">
         <div class="section-header reveal">
             <span class="section-tag">Конкурси</span>
             <h2 class="section-title">Нашите <em style="font-style:italic; color:var(--gold);">постижения</em></h2>
         </div>
-        <div class="competitions-grid reveal" id="competitionsGrid"></div>
+        <div class="competitions-grid reveal" id="competitionsGrid">
+            <!-- зарежда се от JS -->
+        </div>
         <div class="competitions-see-more">
             <a href="#" onclick="openCompetitionsModal(); return false;">Виж още</a>
         </div>
     </section>
 
+    <!-- Модал за конкурси -->
     <div class="competitions-modal" id="competitionsModal">
         <div class="competitions-modal-header">
             <span class="competitions-modal-title">Всички конкурсни снимки</span>
@@ -2216,7 +2019,7 @@
         </div>
     </section>
 
-    <!-- ==================== GALLERY (само 13 снимки, без празни места) ==================== -->
+    <!-- ==================== GALLERY ==================== -->
     <section id="featured">
         <div class="section-header reveal">
             <span class="section-tag">Портфолио</span>
@@ -2228,6 +2031,7 @@
         </div>
     </section>
 
+    <!-- Модал за галерия -->
     <div class="all-photos-modal" id="allPhotosModal">
         <div class="all-photos-modal-header">
             <span class="all-photos-modal-title">Всички Маникюри</span>
@@ -2254,25 +2058,19 @@
                 <h2 class="section-title" style="margin-bottom: 40px;">Заповядайте при нас</h2>
                 <div class="info-block">
                     <div class="info-label">Адрес</div>
-                    <div class="info-text">
-                        <a href="https://maps.app.goo.gl/zq92oSyZRAJKddgX8?g_st=ic" target="_blank" style="color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">
-                            Гр. Ямбол, бул. „Димитър Благоев“ 1 / Партер
-                        </a>
-                    </div>
+                    <div class="info-text">Гр. Ямбол, бул. „Димитър Благоев“ 1 / Партер</div>
                 </div>
                 <div class="info-block">
                     <div class="info-label">Телефон за връзка</div>
                     <div class="info-text">
-                        <a href="tel:+359895681021" style="color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">
-                            +359 89 568 1021
-                        </a>
+                        <a href="tel:+359895681021" style="color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">+359 89 568 1021</a>
                     </div>
                 </div>
                 <div class="info-block">
                     <div class="info-label">Социални мрежи</div>
                     <div class="info-text">
                         <div class="social-buttons-contact">
-                            <a href="https://www.facebook.com/share/1BR55dfJBa/" target="_blank" class="social-btn">
+                            <a href="https://www.facebook.com/share/1DJaNsHAME/" target="_blank" class="social-btn">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
                                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                                 </svg>
@@ -2313,7 +2111,7 @@
     <footer>
         <div class="footer-wrap">
             <div class="footer-social">
-                <a href="https://www.facebook.com/share/1BR55dfJBa/" target="_blank" aria-label="Facebook">
+                <a href="https://www.facebook.com/share/1DJaNsHAME/" target="_blank" aria-label="Facebook">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                     </svg>
@@ -2331,8 +2129,8 @@
         </div>
     </footer>
 
-    <!-- ==================== FAB (телефон) ==================== -->
-    <a href="tel:+359895681021" class="fab" id="fab" aria-label="Обадете ни се">
+    <!-- ==================== WHATSAPP FAB ==================== -->
+    <a href="https://wa.me/359895681021" class="fab" id="fab" target="_blank" aria-label="Запази час">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
         </svg>
@@ -2340,7 +2138,7 @@
 
     <script>
         /* ────────────────────────────────────────────────────────────────── */
-        /* 1. REVIEWS DATA                                                 */
+        /* 1. ДАННИ ЗА РЕВЮТАТА (REVIEWS DATA)                             */
         /* ────────────────────────────────────────────────────────────────── */
         const reviewsData = [
             { name: 'Дияна Вълчева', initial: 'Д', text: 'Салонът е уютен и безупречно чист, а Хриси е прекрасна – прецизна, мила и забавна. Винаги си тръгвам с усмивка и перфектен маникюр.' },
@@ -2353,6 +2151,9 @@
             { name: 'Елица Дойчева', initial: 'Е', text: 'Приказно място, в което те посрещат изключително мило, с огромна усмивка и творят истинско изкуство върху ноктите.' }
         ];
 
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 2. ФУНКЦИЯ ЗА ИЗГРАЖДАНЕ НА БЕЗКРАЙНИТЕ РЕВЮТА                  */
+        /* ────────────────────────────────────────────────────────────────── */
         function buildReviewsTrack() {
             const track = document.getElementById('reviewsTrack');
             if (!track) return;
@@ -2374,7 +2175,7 @@
         buildReviewsTrack();
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 2. ADVANCED TRAININGS TOGGLE                                     */
+        /* 3. РАЗГЪВАНЕ НА ДОПЪЛНИТЕЛНИТЕ ОБУЧЕНИЯ                          */
         /* ────────────────────────────────────────────────────────────────── */
         function toggleAdvancedTrainings(btn) {
             const wrap = document.getElementById('advancedTrainings');
@@ -2387,7 +2188,7 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 3. GALLERY – 13 images (1.jpg … 13.jpg)                         */
+        /* 4. ГАЛЕРИЯ – снимки от 1.jpg до 13.jpg (всички в корена)        */
         /* ────────────────────────────────────────────────────────────────── */
         const galleryImages = [];
         for (let i = 1; i <= 13; i++) {
@@ -2398,8 +2199,7 @@
 
         function buildAllPhotosGrid() {
             const grid = document.getElementById('allPhotosGrid');
-            // показваме първите 8
-            grid.innerHTML = galleryImages.slice(0, 8).map((src, i) => `
+            grid.innerHTML = galleryImages.slice(0, 4).map((src, i) => `
                 <div class="all-photo-item" onclick="openLightbox(${i})">
                     <img src="${src}" alt="Маникюр ${i+1}">
                 </div>
@@ -2410,7 +2210,6 @@
         function openAllPhotos() {
             const modal = document.getElementById('allPhotosModal');
             const grid = document.getElementById('allPhotosModalGrid');
-            // в модала показваме всички 13
             grid.innerHTML = galleryImages.map((src, i) => `
                 <div class="all-photo-item" onclick="closeAllPhotos(); openLightbox(${i});">
                     <img src="${src}" alt="Маникюр ${i+1}">
@@ -2426,7 +2225,7 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 4. LIGHTBOX                                                      */
+        /* 5. СВЕТЛИННА КУТИЯ (LIGHTBOX) – без брояч                       */
         /* ────────────────────────────────────────────────────────────────── */
         function updateBodyScroll() {
             const lbActive = document.getElementById('lightboxModal').classList.contains('active');
@@ -2475,6 +2274,9 @@
             }
         }
 
+        /* ────────────────────────────────────────────────────────────────── */
+        /* 6. КЛАВИШИ ЗА НАВИГАЦИЯ В СВЕТЛИННАТА КУТИЯ                      */
+        /* ────────────────────────────────────────────────────────────────── */
         document.addEventListener('keydown', (e) => {
             const lightbox = document.getElementById('lightboxModal');
             if (lightbox.classList.contains('active')) {
@@ -2489,7 +2291,7 @@
         });
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 5. INTRO ANIMATION                                               */
+        /* 7. НАЧАЛНА ИНТРО АНИМАЦИЯ                                        */
         /* ────────────────────────────────────────────────────────────────── */
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -2504,7 +2306,7 @@
         });
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 6. SCROLL EFFECTS                                                */
+        /* 8. СКРОЛВАНЕ ЗА НАВИГАЦИЯ И FAB БУТОНА                           */
         /* ────────────────────────────────────────────────────────────────── */
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
@@ -2519,7 +2321,7 @@
         });
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 7. REVEAL ON SCROLL                                              */
+        /* 9. АНИМАЦИЯ ПРИ ПОЯВЯВАНЕ                                         */
         /* ────────────────────────────────────────────────────────────────── */
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
@@ -2533,7 +2335,7 @@
         reveals.forEach(el => observer.observe(el));
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 8. MOBILE MENU                                                   */
+        /* 10. МОБИЛНО МЕНЮ                                                  */
         /* ────────────────────────────────────────────────────────────────── */
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
@@ -2541,7 +2343,7 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 9. VIDEO PLAY                                                    */
+        /* 11. ПУСКАНЕ НА ВИДЕО                                             */
         /* ────────────────────────────────────────────────────────────────── */
         function playVideo(videoId, posterId) {
             const video = document.getElementById(videoId);
@@ -2554,7 +2356,7 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 10. COMPETITIONS – точни имена: k1.jpg, K2.jpg … K13.jpg         */
+        /* 12. КОНКУРСИ – снимки: k1.jpg, K2.jpg … K13.jpg (в корена)      */
         /* ────────────────────────────────────────────────────────────────── */
         const competitionImages = [
             'k1.jpg',
