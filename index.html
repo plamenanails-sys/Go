@@ -1679,6 +1679,7 @@
             <li><a href="#about">За мен</a></li>
             <li><a href="#videos">Видеа</a></li>
             <li><a href="#team">Екип</a></li>
+            <li><a href="#training">Обучения</a></li>
             <li><a href="#prices">Цени</a></li>
             <li><a href="#competitions">Конкурси</a></li>
             <li><a href="#featured">Галерия</a></li>
@@ -1710,6 +1711,7 @@
         <a href="#about" onclick="toggleMenu()">За мен</a>
         <a href="#videos" onclick="toggleMenu()">Видеа</a>
         <a href="#team" onclick="toggleMenu()">Екип</a>
+        <a href="#training" onclick="toggleMenu()">Обучения</a>
         <a href="#prices" onclick="toggleMenu()">Цени</a>
         <a href="#competitions" onclick="toggleMenu()">Конкурси</a>
         <a href="#featured" onclick="toggleMenu()">Галерия</a>
@@ -1875,37 +1877,7 @@
         </div>
     </section>
 
-    <!-- ==================== PRICE LIST (само снимка) ==================== -->
-    <section id="prices" class="prices-section">
-        <div class="price-image-wrapper reveal">
-            <img src="chenorazpis.jpg" alt="Ценоразпис Nails Plamena Cholakova">
-        </div>
-    </section>
-
-    <!-- ==================== COMPETITIONS ==================== -->
-    <section id="competitions" class="competitions-section">
-        <div class="section-header reveal">
-            <span class="section-tag">Конкурси</span>
-            <h2 class="section-title">Нашите <em style="font-style:italic; color:var(--gold);">постижения</em></h2>
-        </div>
-        <div class="competitions-grid reveal" id="competitionsGrid">
-            <!-- зарежда се от JS -->
-        </div>
-        <div class="competitions-see-more">
-            <a href="#" onclick="openCompetitionsModal(); return false;">Виж още</a>
-        </div>
-    </section>
-
-    <!-- Модал за конкурси -->
-    <div class="competitions-modal" id="competitionsModal">
-        <div class="competitions-modal-header">
-            <span class="competitions-modal-title">Всички конкурсни снимки</span>
-            <button class="competitions-modal-close" onclick="closeCompetitionsModal()">✕</button>
-        </div>
-        <div class="competitions-modal-grid" id="competitionsModalGrid"></div>
-    </div>
-
-    <!-- ==================== TRAININGS ==================== -->
+    <!-- ==================== TRAINING ==================== -->
     <section id="training" class="training-section">
         <div class="section-header reveal">
             <span class="section-tag">Обучения</span>
@@ -2002,6 +1974,36 @@
             <div style="height: 60px;"></div>
         </div>
     </section>
+
+    <!-- ==================== PRICE LIST (само снимка) ==================== -->
+    <section id="prices" class="prices-section">
+        <div class="price-image-wrapper reveal">
+            <img src="chenorazpis.jpg" alt="Ценоразпис Nails Plamena Cholakova">
+        </div>
+    </section>
+
+    <!-- ==================== COMPETITIONS ==================== -->
+    <section id="competitions" class="competitions-section">
+        <div class="section-header reveal">
+            <span class="section-tag">Конкурси</span>
+            <h2 class="section-title">Нашите <em style="font-style:italic; color:var(--gold);">постижения</em></h2>
+        </div>
+        <div class="competitions-grid reveal" id="competitionsGrid">
+            <!-- зарежда се от JS -->
+        </div>
+        <div class="competitions-see-more">
+            <a href="#" onclick="openCompetitionsModal(); return false;">Виж още</a>
+        </div>
+    </section>
+
+    <!-- Модал за конкурси -->
+    <div class="competitions-modal" id="competitionsModal">
+        <div class="competitions-modal-header">
+            <span class="competitions-modal-title">Всички конкурсни снимки</span>
+            <button class="competitions-modal-close" onclick="closeCompetitionsModal()">✕</button>
+        </div>
+        <div class="competitions-modal-grid" id="competitionsModalGrid"></div>
+    </div>
 
     <!-- ==================== REVIEWS ==================== -->
     <section id="reviews" class="reviews-section">
