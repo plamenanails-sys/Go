@@ -1829,12 +1829,12 @@
                     <video id="video1" src="plamena-nails.mp4" controls playsinline preload="metadata"></video>
                 </div>
             </div>
-            <!-- Второ видео – Маникюр (заменено с новото) -->
+            <!-- Второ видео – Маникюр (постер 28.jpg) -->
             <div class="video-block">
                 <div class="video-title">Маникюр</div>
                 <div class="video-wrapper">
                     <div class="video-poster-overlay" id="poster2">
-                        <img src="13.jpg" alt="Начало на маникюр">
+                        <img src="28.jpg" alt="Начало на маникюр">
                         <button class="play-btn" onclick="playVideo('video2', 'poster2')">▶</button>
                     </div>
                     <video id="video2" src="salon-video.mp4" controls playsinline preload="metadata"></video>
@@ -2190,11 +2190,17 @@
         }
 
         /* ────────────────────────────────────────────────────────────────── */
-        /* 4. ГАЛЕРИЯ – снимки от 1.jpg до 13.jpg (всички в корена)        */
+        /* 4. ГАЛЕРИЯ – снимки от 1.jpg до 28.jpg (всички в корена, без 27) */
         /* ────────────────────────────────────────────────────────────────── */
         const galleryImages = [];
+        // Стари снимки 1-13
         for (let i = 1; i <= 13; i++) {
             galleryImages.push(i + '.jpg');
+        }
+        // Нови снимки 14-26 + 28 (27 липсва)
+        const newImages = [14,15,16,17,18,19,20,21,22,23,24,25,26,28];
+        for (let i = 0; i < newImages.length; i++) {
+            galleryImages.push(newImages[i] + '.jpg');
         }
 
         let currentImageIndex = 0;
